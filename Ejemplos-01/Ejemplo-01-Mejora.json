@@ -1,0 +1,243 @@
+{
+  "name": "Ejemplo-01-Mejora copy 2",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1DOw0r-L6bnpndCi92tJUqRWIly4nrddpl3ktydGknXg",
+          "mode": "list",
+          "cachedResultName": "Hoja-n8n-Ej1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DOw0r-L6bnpndCi92tJUqRWIly4nrddpl3ktydGknXg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DOw0r-L6bnpndCi92tJUqRWIly4nrddpl3ktydGknXg/edit#gid=0"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "4a46a673-56a1-4e99-bcc9-39a57292dc6c",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "6aVHNnzgmogepJwO",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "2f9feab8-0bed-4d40-97a2-7055905ee165",
+              "leftValue": "={{ $json.Enviado }}",
+              "rightValue": "No",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "af747dcc-36a9-4135-884e-ce373e8d5c73",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "sendTo": "amolnavn8n@gmail.com",
+        "subject": "User Add",
+        "emailType": "text",
+        "message": "={{ $json.Nombre }} Añadido como {{ $json.Tipo }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        480,
+        -80
+      ],
+      "id": "5aab047c-164a-44e3-83bd-114e47826aa6",
+      "name": "Send a message",
+      "webhookId": "a23f1d87-3d7f-4a80-afe0-0714d56b9ba0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "IlqRF51BxmMqs1ri",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1DOw0r-L6bnpndCi92tJUqRWIly4nrddpl3ktydGknXg",
+          "mode": "list",
+          "cachedResultName": "Hoja-n8n-Ej1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DOw0r-L6bnpndCi92tJUqRWIly4nrddpl3ktydGknXg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DOw0r-L6bnpndCi92tJUqRWIly4nrddpl3ktydGknXg/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Correo": "={{ $json.Correo }}",
+            "Enviado": "Si"
+          },
+          "matchingColumns": [
+            "Correo"
+          ],
+          "schema": [
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Correo",
+              "displayName": "Correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Tipo",
+              "displayName": "Tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Enviado",
+              "displayName": "Enviado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        496,
+        80
+      ],
+      "id": "36c3615e-80ff-4ce9-a57a-d4217fb16e5d",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "VNP40ELJ9GMfulek",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "6b44b98f-421c-49a6-ac81-527acec5229b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "11924fccdf079473cc072c836dc87c2e3f64d726acaf305fc9e1cb9a85aed188"
+  },
+  "id": "8NjLNsIGlNi63aA7",
+  "tags": []
+}
